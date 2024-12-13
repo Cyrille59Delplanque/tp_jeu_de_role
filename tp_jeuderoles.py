@@ -47,10 +47,10 @@ from random import randint
 
 menu1 = "Creer Personnage"
 menu2 = "Voir Inventaire"
-menu3 = "Utliser objet dans Inventaire"
+menu3 = "Utiliser Potion de soin"
 menu4 = "Voir tous les Personnages et le détail "
 menu5 = "Attaquer Personnage "
-menu6 = "Se deplacer "
+menu6 = "Modifier experience "
 
 def model_personnage()->dict:
     """_model of caracters for the role play_
@@ -89,65 +89,185 @@ def visualisation_inventaire(inventaire:list):
         for objet in inventaire:
             print (f"{objet["quantité"]} {objet["nom"]}")
 
-def ajout_objet_inventaire(inventaire:list):
-    pass
+def ajout_objet_inventaire(inventaire:list,objet:dict):
+    """_add a object in a inventory list_
+
+    Args:
+        inventaire (list): _inventory list_
+        objet (dict): _object_
+    """
+    existe_ds_la_liste, index_liste = controle_objet_dans_la_liste(inventaire,objet)
+    if existe_ds_la_liste:
+        ajout_quantite_objet_dans_la_liste(inventaire,index_liste,objet["quantité"])
+    else:
+        inventaire.append(objet)   
 
 def modif_experience_personnage(personnage:dict):
+    """_update caracter experience_
+
+    Args:
+        personnage (dict): _caracter_
+    """
     personnage["niveau"] += 1
-    personnage["point de vie"] += 20
+    personnage["points de vie"] += 20
+    print("Experience Modifiée")
 
 def utiliser_fonction_soin(personnage:dict):
-    pass
+    """_use a item of heathcare to recover life_
 
-def supprimer_objet_inventaire(inventaire:list,objet:dict):
-    pass
+    Args:
+        personnage (dict): _caracter_
+    """
+    inventaire_du_perso = personnage["inventaire"]
+    index = 0
+    found = False
+    while index < len(inventaire_du_perso):
+        if inventaire_du_perso[index]["nom"] == "Potion de soin":
+            found = True
+            break
+        index +=1
+    if not found:
+        print("Pas de Potion de soin disponible")
+    else:
+        inventaire_du_perso[index]["quantité"] -= 1
+        if inventaire_du_perso[index]["quantité"] <= 0:
+            inventaire_du_perso.pop(index)
+    personnage["points de vie"] += randint(1,50)
+    print(f"Potion de soin utilisée") 
 
 def afficher_personnage(personnage:dict):
+    """_display the detail of a caracter_
+
+    Args:
+        personnage (dict): _caracter_
+    """
     for denomination,valeur in personnage.items():
         if denomination != "inventaire":
             print(f"{denomination} : {valeur}")
         else:
             visualisation_inventaire(valeur)
+            
+def selectionner_personnage(liste_personnage:list,commentaire:str="")->int:
+    """_select a caracter_
 
-def attaquer(personnage_attaquant:dict,personnage_attaque:dict):
-    application_degat(personnage_attaque,10*int(personnage_attaquant["niveau"]))
+    Args:
+        liste_personnage (list): _lsit of caracter_
+        commentaire (str, optional): _comment add to message for user_. Defaults to "".
+
+    Returns:
+        int: _index of the selected caracter in the list_
+    """
+    visualisation_liste_personnage(liste_personnage, False)
+    while True:
+        try:
+            index_liste_perso = int(input(f"Veuillez saisir le numéro du personnage {commentaire}: "))
+            if index_liste_perso < 0 or index_liste_perso >= len(liste_personnage):
+                print("Selection Personnage Non Valide")
+            else:
+                print(f"Personnage {liste_personnage[index_liste_perso]["nom"]} selectionne {commentaire}")
+                return index_liste_perso
+        except ValueError as error:
+            print("Erreur de saisie: ",error)
+
+def attaquer(personnage_attaquant:int,personnage_attaque:int,list_perso:list):
+    """_attack a caracter by another one, 
+    check if defender is dead or not and transfer inventory to attaquer if yes_
+
+    Args:
+        personnage_attaquant (int): _index of caracter in the list of caracter_
+        personnage_attaque (int): _index of caracter in the list of caracter_
+        list_perso (list): _list of caracter_
+    """
+    calcul_degat = 10*int(list_perso[personnage_attaquant]["niveau"])
+    application_degat(list_perso[personnage_attaque],calcul_degat)
+    print(f"Le personnage {list_perso[personnage_attaquant]["nom"]} a infligé {calcul_degat} degats\
+au personnage {list_perso[personnage_attaque]["nom"]}")
+    if personnage_est_mort(list_perso[personnage_attaque]):
+        print(f"{list_perso[personnage_attaque]["nom"]} est mort")
+        recuperation_inventaire(list_perso[personnage_attaque],list_perso[personnage_attaquant])
+        print(f"Les objets ont été recupére par {list_perso[personnage_attaquant]["nom"]}")
+        list_perso.pop(personnage_attaque)
 
 def application_degat(personnage:dict,degat:int):
-    personnage["point de vie"] -= degat
+    """_substract life to caracter_
+
+    Args:
+        personnage (dict): _caracter_
+        degat (int): _point of life to substract_
+    """
+    personnage["points de vie"] -= degat
 
 def personnage_est_mort(personnage:dict)->bool:
-    return True if personnage["point de vie"] else False
+    """_is caracter is dead_
+
+    Args:
+        personnage (dict): _caracter_
+
+    Returns:
+        bool: _True if caracter has no more life False if not_
+    
+    >>> print(personnage_est_mort({"points de vie":-1}))
+    True
+    
+    >>> print(personnage_est_mort({"points de vie":10}))
+    False
+    
+    """
+    return True if personnage["points de vie"] <= 0 else False
 
 def recuperation_inventaire(personnage_origine:dict,personnage_destinataire:dict):
-    pass
+    """_transfer inventory from 1 to the second caracter_
 
-def menu_du_jeu(choix:int):
+    Args:
+        personnage_origine (dict): _caracter which will transfer the inventory_
+        personnage_destinataire (dict): _caracter which will gain the inventory_
+    """
+    for objet_origine in personnage_origine["inventaire"]:
+        found, index_list_origin = controle_objet_dans_la_liste(personnage_destinataire["inventaire"],objet_origine)
+        if found:
+            ajout_quantite_objet_dans_la_liste(personnage_destinataire["inventaire"],index_list_origin,objet_origine["quantité"])
+        else:
+            personnage_destinataire["inventaire"].append(objet_origine)
+
+def menu_du_jeu(choix:int,list_perso:list):
+    """_game menu_
+
+    Args:
+        choix (int): _menu choice input_
+        list_perso (list): _list of caracters_
+    """
     match choix:
         case 0:
             exit()
         case 1:
             print(f"---  {menu1} ---")
-            creation_personnage(model_personnage())
+            list_perso.append(creation_personnage(model_personnage()))
         case 2:
             print(f"---  {menu2} ---")
-            #voir inventaire
+            visualisation_inventaire(list_perso[selectionner_personnage(list_perso)]["inventaire"])
         case 3:
             print(f"---  {menu3} ---")
-            #utiliser objet ds inventaire
+            utiliser_fonction_soin(list_perso[selectionner_personnage(list_perso)])
         case 4:
             print(f"---  {menu4} ---")
-            #voir tout les personnages et le detail
+            visualisation_liste_personnage(list_perso)
         case 5:
             print(f"---  {menu5} ---")
-            #attaquer personnage
+            attaquer(selectionner_personnage(list_perso,"attaquant"),
+                     selectionner_personnage(list_perso,"attaqué"),list_perso)
         case 6:
             print(f"---  {menu6} ---")
-            #se deplacer
+            modif_experience_personnage(list_perso[selectionner_personnage(list_perso)])
         case _:
             print("Selection Incorrecte")
     print() 
 
 def affichage_menu()->int:
+    """_display the main selection menu_
+
+    Returns:
+        int: _number of menu selected_
+    """
     print("=== MENU PRINCIPAL JEU DE ROLE SANA CYRILLE ===")
     print("1. "+menu1)
     print("2. "+menu2)
@@ -254,14 +374,22 @@ def ajout_personnage_jeu(liste_personnage:list, personnage:dict):
     """
     liste_personnage.append(personnage)
 
-def visualisation_liste_personnage(liste_personnage:list):
+def visualisation_liste_personnage(liste_personnage:list, detail:bool=True):
     """_show the list of caracter in game_
 
     Args:
         liste_personnage (list): _list of caracter_
+        detail (bool): _True to show Detail, False to only show Name & Classe_ Default to True
     """
-    for personnage in liste_personnage:
-        print (f"{personnage["nom"]} {personnage["classe"]}") 
+    if detail:
+        for personnage in liste_personnage:
+            afficher_personnage(personnage)
+            print('-'*23)   
+    else:
+        index = 0
+        for personnage in liste_personnage:
+            print (f"{index}. {personnage["nom"]} {personnage["classe"]}") 
+            index += 1
 
 def controle_objet_dans_la_liste(liste_objet:list,objet:dict)->tuple:
     """_control if the objet name is already in the list of object_
@@ -274,16 +402,16 @@ def controle_objet_dans_la_liste(liste_objet:list,objet:dict)->tuple:
         tuple: _bool,index bool True if in the list, False if not and index is the index in the list if is found_
     """
     if len(liste_objet) <0:
-        return False,_
+        return False, None
     index_liste_inventaire = 0
     for objet_de_la_liste in liste_objet:
         if objet["nom"] == objet_de_la_liste["nom"]:
             return True,index_liste_inventaire
         index_liste_inventaire += 1
-    return False,_
+    return False, None
 
 def ajout_quantite_objet_dans_la_liste(liste_objet:list,index_list:int,quantite:int):
-    """_add quanity of an objet alreay in the list_
+    """_add quantity of an objet already in the list_
 
     Args:
         liste_objet (list): _list of object_
@@ -291,20 +419,15 @@ def ajout_quantite_objet_dans_la_liste(liste_objet:list,index_list:int,quantite:
         quantite (int): _quantity to add_
     """
     liste_objet[index_list]["quantité"] += quantite
-
+    
 
 def main():
+    """_main fonction_
+    """
     liste_perso=[]
     while True:
-        menu_du_jeu(affichage_menu())
-
-#définir max de point de vie, max de niveau (l'inclure dans le controle de la saisie), definir fonction deplacement pour trouver des objets
-#définir qté max d'objet dans l'inventaire et controler en cas d'ajout
-#creer un sous menu inventaire pour utiliser les objets
-
-#test = creation_objet(model_objet())
-# test2= creation_objet(model_objet(),"Potion de soin",3)
-# print(test2)
+        menu_du_jeu(affichage_menu(),liste_perso)
 
 if __name__ == "__main__":
     main()
+
