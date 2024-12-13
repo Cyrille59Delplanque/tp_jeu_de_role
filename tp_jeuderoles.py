@@ -58,7 +58,6 @@ def model_personnage()->dict:
     Returns:
         dict: _all element that represent the caracter_
     """
-    
     return {
        "nom":None,
        "classe":None,
@@ -293,10 +292,19 @@ def ajout_quantite_objet_dans_la_liste(liste_objet:list,index_list:int,quantite:
     """
     liste_objet[index_list]["quantité"] += quantite
 
+
+def main():
+    liste_perso=[]
+    while True:
+        menu_du_jeu(affichage_menu())
+
 #définir max de point de vie, max de niveau (l'inclure dans le controle de la saisie), definir fonction deplacement pour trouver des objets
 #définir qté max d'objet dans l'inventaire et controler en cas d'ajout
 #creer un sous menu inventaire pour utiliser les objets
 
 #test = creation_objet(model_objet())
-test2= creation_objet(model_objet(),"Potion de soin",3)
-print(test2)
+# test2= creation_objet(model_objet(),"Potion de soin",3)
+# print(test2)
+
+if __name__ == "__main__":
+    main()
