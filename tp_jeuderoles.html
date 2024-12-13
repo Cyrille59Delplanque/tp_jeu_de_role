@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module tp_jeuderoles</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">tp_jeuderoles</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Ccyd%5Cpython%5Ctp_jeu_de_role%5Ctp_jeuderoles.py">c:\cyd\python\tp_jeu_de_role\tp_jeuderoles.py</a></td></tr></table>
+    <p><span class="code">#&nbsp;#&nbsp;TP&nbsp;:&nbsp;Jeu&nbsp;de&nbsp;rôle</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-affichage_menu"><strong>affichage_menu</strong></a>() -&gt; int</dt><dd><span class="code">_display&nbsp;the&nbsp;main&nbsp;selection&nbsp;menu_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;_number&nbsp;of&nbsp;menu&nbsp;selected_</span></dd></dl>
+ <dl><dt><a name="-afficher_personnage"><strong>afficher_personnage</strong></a>(personnage: dict)</dt><dd><span class="code">_display&nbsp;the&nbsp;detail&nbsp;of&nbsp;a&nbsp;caracter_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_</span></dd></dl>
+ <dl><dt><a name="-ajout_objet_inventaire"><strong>ajout_objet_inventaire</strong></a>(inventaire: list, objet: dict)</dt><dd><span class="code">_add&nbsp;a&nbsp;object&nbsp;in&nbsp;a&nbsp;inventory&nbsp;list_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;inventaire&nbsp;(list):&nbsp;_inventory&nbsp;list_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;objet&nbsp;(dict):&nbsp;_object_</span></dd></dl>
+ <dl><dt><a name="-ajout_personnage_jeu"><strong>ajout_personnage_jeu</strong></a>(liste_personnage: list, personnage: dict)</dt><dd><span class="code">_add&nbsp;a&nbsp;caracters&nbsp;into&nbsp;the&nbsp;list&nbsp;of&nbsp;caracters_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_personnage&nbsp;(list):&nbsp;_list&nbsp;àf&nbsp;caracters_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_</span></dd></dl>
+ <dl><dt><a name="-ajout_quantite_objet_dans_la_liste"><strong>ajout_quantite_objet_dans_la_liste</strong></a>(
+    liste_objet: list,
+    index_list: int,
+    quantite: int
+)</dt><dd><span class="code">_add&nbsp;quantity&nbsp;of&nbsp;an&nbsp;objet&nbsp;already&nbsp;in&nbsp;the&nbsp;list_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_objet&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;object_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index_list&nbsp;(int):&nbsp;_position&nbsp;of&nbsp;the&nbsp;object&nbsp;in&nbsp;the&nbsp;list_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;quantite&nbsp;(int):&nbsp;_quantity&nbsp;to&nbsp;add_</span></dd></dl>
+ <dl><dt><a name="-application_degat"><strong>application_degat</strong></a>(personnage: dict, degat: int)</dt><dd><span class="code">_substract&nbsp;life&nbsp;to&nbsp;caracter_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;degat&nbsp;(int):&nbsp;_point&nbsp;of&nbsp;life&nbsp;to&nbsp;substract_</span></dd></dl>
+ <dl><dt><a name="-attaquer"><strong>attaquer</strong></a>(personnage_attaquant: int, personnage_attaque: int, list_perso: list)</dt><dd><span class="code">_attack&nbsp;a&nbsp;caracter&nbsp;by&nbsp;another&nbsp;one,&nbsp;<br>
+check&nbsp;if&nbsp;defender&nbsp;is&nbsp;dead&nbsp;or&nbsp;not&nbsp;and&nbsp;transfer&nbsp;inventory&nbsp;to&nbsp;attaquer&nbsp;if&nbsp;yes_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage_attaquant&nbsp;(int):&nbsp;_index&nbsp;of&nbsp;caracter&nbsp;in&nbsp;the&nbsp;list&nbsp;of&nbsp;caracter_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage_attaque&nbsp;(int):&nbsp;_index&nbsp;of&nbsp;caracter&nbsp;in&nbsp;the&nbsp;list&nbsp;of&nbsp;caracter_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list_perso&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;caracter_</span></dd></dl>
+ <dl><dt><a name="-controle_champ_vide"><strong>controle_champ_vide</strong></a>(entree: str) -&gt; bool</dt><dd><span class="code">_Control&nbsp;fonction&nbsp;to&nbsp;avoid&nbsp;empty&nbsp;field_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entree&nbsp;(str):&nbsp;_input&nbsp;to&nbsp;control_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;_True&nbsp;if&nbsp;input&nbsp;is&nbsp;empty,&nbsp;False&nbsp;if&nbsp;not&nbsp;empty_</span></dd></dl>
+ <dl><dt><a name="-controle_objet_dans_la_liste"><strong>controle_objet_dans_la_liste</strong></a>(liste_objet: list, objet: dict) -&gt; tuple</dt><dd><span class="code">_control&nbsp;if&nbsp;the&nbsp;objet&nbsp;name&nbsp;is&nbsp;already&nbsp;in&nbsp;the&nbsp;list&nbsp;of&nbsp;object_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_objet&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;object_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;objet&nbsp;(dict):&nbsp;_object_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;_bool,index&nbsp;bool&nbsp;True&nbsp;if&nbsp;in&nbsp;the&nbsp;list,&nbsp;False&nbsp;if&nbsp;not&nbsp;and&nbsp;index&nbsp;is&nbsp;the&nbsp;index&nbsp;in&nbsp;the&nbsp;list&nbsp;if&nbsp;is&nbsp;found_</span></dd></dl>
+ <dl><dt><a name="-controle_saisie"><strong>controle_saisie</strong></a>(cle: str) -&gt; str</dt><dd><span class="code">_ask&nbsp;for&nbsp;input&nbsp;and&nbsp;control&nbsp;for&nbsp;an&nbsp;item&nbsp;&nbsp;_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cle&nbsp;(str):&nbsp;_item&nbsp;of&nbsp;caracter&nbsp;or&nbsp;object_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;_a&nbsp;valid&nbsp;input&nbsp;for&nbsp;the&nbsp;item&nbsp;of&nbsp;the&nbsp;caracter_</span></dd></dl>
+ <dl><dt><a name="-creation_objet"><strong>creation_objet</strong></a>(objet: dict, nom_objet: str = None, quantite: int = 0) -&gt; dict</dt><dd><span class="code">_create&nbsp;an&nbsp;objet&nbsp;that&nbsp;can&nbsp;be&nbsp;taken&nbsp;in&nbsp;inventory_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;objet&nbsp;(dict):&nbsp;_an&nbsp;object&nbsp;as&nbsp;model_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nom_objet&nbsp;(str):&nbsp;_name&nbsp;of&nbsp;the&nbsp;object&nbsp;to&nbsp;create_&nbsp;Defaults&nbsp;to&nbsp;None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;quantite&nbsp;(int):&nbsp;_quantity&nbsp;of&nbsp;the&nbsp;object&nbsp;to&nbsp;create_&nbsp;Defauts&nbsp;to&nbsp;0<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_the&nbsp;object&nbsp;created_</span></dd></dl>
+ <dl><dt><a name="-creation_personnage"><strong>creation_personnage</strong></a>(personnage: dict) -&gt; dict</dt><dd><span class="code">_create&nbsp;a&nbsp;caracter&nbsp;with&nbsp;3&nbsp;potion&nbsp;de&nbsp;soin_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_a&nbsp;model&nbsp;of&nbsp;caracter_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_a&nbsp;caracter&nbsp;created&nbsp;with&nbsp;3&nbsp;item&nbsp;in&nbsp;inventory_</span></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><span class="code">_main&nbsp;fonction_</span></dd></dl>
+ <dl><dt><a name="-menu_du_jeu"><strong>menu_du_jeu</strong></a>(choix: int, list_perso: list)</dt><dd><span class="code">_game&nbsp;menu_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;choix&nbsp;(int):&nbsp;_menu&nbsp;choice&nbsp;input_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list_perso&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;caracters_</span></dd></dl>
+ <dl><dt><a name="-model_objet"><strong>model_objet</strong></a>() -&gt; dict</dt><dd><span class="code">_model&nbsp;of&nbsp;the&nbsp;object&nbsp;that&nbsp;will&nbsp;be&nbsp;use&nbsp;in&nbsp;inventory_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_all&nbsp;element&nbsp;that&nbsp;are&nbsp;the&nbsp;object_</span></dd></dl>
+ <dl><dt><a name="-model_personnage"><strong>model_personnage</strong></a>() -&gt; dict</dt><dd><span class="code">_model&nbsp;of&nbsp;caracters&nbsp;for&nbsp;the&nbsp;role&nbsp;play_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_all&nbsp;element&nbsp;that&nbsp;represent&nbsp;the&nbsp;caracter_</span></dd></dl>
+ <dl><dt><a name="-modif_experience_personnage"><strong>modif_experience_personnage</strong></a>(personnage: dict)</dt><dd><span class="code">_update&nbsp;caracter&nbsp;experience_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_</span></dd></dl>
+ <dl><dt><a name="-personnage_est_mort"><strong>personnage_est_mort</strong></a>(personnage: dict) -&gt; bool</dt><dd><span class="code">_is&nbsp;caracter&nbsp;is&nbsp;dead_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;_True&nbsp;if&nbsp;caracter&nbsp;has&nbsp;no&nbsp;more&nbsp;life&nbsp;False&nbsp;if&nbsp;not_<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;print(<a href="#-personnage_est_mort">personnage_est_mort</a>({"points&nbsp;de&nbsp;vie":-1}))<br>
+True<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;print(<a href="#-personnage_est_mort">personnage_est_mort</a>({"points&nbsp;de&nbsp;vie":10}))<br>
+False</span></dd></dl>
+ <dl><dt><a name="-recuperation_inventaire"><strong>recuperation_inventaire</strong></a>(personnage_origine: dict, personnage_destinataire: dict)</dt><dd><span class="code">_transfer&nbsp;inventory&nbsp;from&nbsp;1&nbsp;to&nbsp;the&nbsp;second&nbsp;caracter_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage_origine&nbsp;(dict):&nbsp;_caracter&nbsp;which&nbsp;will&nbsp;transfer&nbsp;the&nbsp;inventory_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage_destinataire&nbsp;(dict):&nbsp;_caracter&nbsp;which&nbsp;will&nbsp;gain&nbsp;the&nbsp;inventory_</span></dd></dl>
+ <dl><dt><a name="-selectionner_personnage"><strong>selectionner_personnage</strong></a>(liste_personnage: list, commentaire: str = '') -&gt; int</dt><dd><span class="code">_select&nbsp;a&nbsp;caracter_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_personnage&nbsp;(list):&nbsp;_lsit&nbsp;of&nbsp;caracter_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;commentaire&nbsp;(str,&nbsp;optional):&nbsp;_comment&nbsp;add&nbsp;to&nbsp;message&nbsp;for&nbsp;user_.&nbsp;Defaults&nbsp;to&nbsp;"".<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;_index&nbsp;of&nbsp;the&nbsp;selected&nbsp;caracter&nbsp;in&nbsp;the&nbsp;list_</span></dd></dl>
+ <dl><dt><a name="-utiliser_fonction_soin"><strong>utiliser_fonction_soin</strong></a>(personnage: dict)</dt><dd><span class="code">_use&nbsp;a&nbsp;item&nbsp;of&nbsp;heathcare&nbsp;to&nbsp;recover&nbsp;life_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;personnage&nbsp;(dict):&nbsp;_caracter_</span></dd></dl>
+ <dl><dt><a name="-visualisation_inventaire"><strong>visualisation_inventaire</strong></a>(inventaire: list)</dt><dd><span class="code">_inventory&nbsp;visualisation_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;inventaire&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;objet_</span></dd></dl>
+ <dl><dt><a name="-visualisation_liste_personnage"><strong>visualisation_liste_personnage</strong></a>(liste_personnage: list, detail: bool = True)</dt><dd><span class="code">_show&nbsp;the&nbsp;list&nbsp;of&nbsp;caracter&nbsp;in&nbsp;game_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_personnage&nbsp;(list):&nbsp;_list&nbsp;of&nbsp;caracter_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;detail&nbsp;(bool):&nbsp;_True&nbsp;to&nbsp;show&nbsp;Detail,&nbsp;False&nbsp;to&nbsp;only&nbsp;show&nbsp;Name&nbsp;&amp;&nbsp;Classe_&nbsp;Default&nbsp;to&nbsp;True</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>menu1</strong> = 'Creer Personnage'<br>
+<strong>menu2</strong> = 'Voir Inventaire'<br>
+<strong>menu3</strong> = 'Utiliser Potion de soin'<br>
+<strong>menu4</strong> = 'Voir tous les Personnages et le détail '<br>
+<strong>menu5</strong> = 'Attaquer Personnage '<br>
+<strong>menu6</strong> = 'Modifier experience '</td></tr></table>
+</body></html>
